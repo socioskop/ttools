@@ -1,11 +1,11 @@
-#' twoway table of n indicator data for groupwide comparison
+#' twoway table of n indicator data
 #' 
-#' @param data a dataframe with a group variable and a count of individuals (e.g. n=1).
-#' @param x the n-count variable, likely equal to 1 for any row included
-#' @param group a character variable with categories corresponding to the groups being compared
+#' @param data data frame with the group identifier and n-counter
+#' @param x the n count, should be just a konstant k=1, unless data is aggregated
+#' @param group the name of the variable which identifies groups/arms.
 #' 
 #' @export
-twoway_n <- function(data, x, group){
+twoway.n <- function(data, x, group){
   d <- data[!is.na(data[[group]]),]
   tab <- table(d[[x]], d[[group]], useNA="ifany")
   groups <- colnames(tab)
