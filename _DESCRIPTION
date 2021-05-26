@@ -1,0 +1,13 @@
+Package: ttools
+Type: Package
+Title: trial tabulation tools
+Version: 0.1.0
+Author: c(person(given="Anders Bo", 
+                 family="Bojesen", 
+                 role="aut",
+                 email="anders@socioskop.dk",
+                 comment=c(ORCID="0000-0002-5321-6855")))
+Description: tools for tabulation data from RCTs or case-control studies. Or really any data with 2+ groups as the main factor. 
+License: `bsd_3_clause`
+Encoding: UTF-8
+LazyData: true
