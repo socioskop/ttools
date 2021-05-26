@@ -1,5 +1,5 @@
 Package: ttools
-Title: Function library to facilitate standard groupwise comparisons
+Title: trial tabulation tools - Function library to facilitate standard groupwise comparisons
 Version: 0.1.1
 Authors@R: 
   person(given = "Anders Bo",
@@ -13,7 +13,13 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Imports: data.table, dplyr, lubridate, MASS, magrittr, 
+Imports: 
+  data.table, 
+  dplyr, 
+  lubridate, 
+  MASS, 
+  magrittr, 
+  tibble
 Depends: R (>= 2.10), data.table
 NeedsCompilation: no
 Author: Anders Bo Bojesen [aut, cre] (<https://orcid.org/0000-0002-5321-6855>)
