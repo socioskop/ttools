@@ -8,7 +8,7 @@
 #' @param bin character vector with names of those variables in xs that are to be summarized as binary variables
 #' @param num dichotomize vector with names of those categorical variables in xs that should be dichotomized before summarizing 
 #' 
-#' @importFrom magrittr %>%
+#' @importFrom magrittr "%>%"
 #' 
 #' @export
 ttabulate <- function(data, xs, treat, num=NA, cat=NA, bin=NA, dichotomize=NA, cal.date=NA, cens=5, show.na=F){
