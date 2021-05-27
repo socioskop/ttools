@@ -5,7 +5,7 @@
 #' @param group the name of the variable which identifies groups/arms.
 #' 
 #' @export
-twoway.n <- function(data, x, group){
+twoway_n <- function(data, x, group){
   d <- data[!is.na(data[[group]]),]
   tab <- table(d[[x]], d[[group]], useNA="ifany")
   groups <- colnames(tab)

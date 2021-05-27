@@ -8,7 +8,7 @@ Authors@R:
          email = "anders@socioskop.dk",
          comment = c(ORCID = "0000-0002-5321-6855"))
 Description: tools for tabulation data from RCTs or case-control studies. Or really any data with 2+ groups as the main factor. 
-License: `bsd_3_clause`
+License: MIT
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -16,12 +16,11 @@ RoxygenNote: 7.1.1
 Imports: 
   data.table, 
   dplyr, 
+  stats,
   lubridate, 
   MASS, 
   magrittr, 
-  tibble
-Depends: R (>= 2.10), data.table
-NeedsCompilation: no
-Author: Anders Bo Bojesen [aut, cre] (<https://orcid.org/0000-0002-5321-6855>)
-Maintainer: Anders Bo Bojesen <anders@socioskop.dk>
-  
+  tibble,
+  foreach,
+  haven,
+  stringr

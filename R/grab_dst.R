@@ -7,6 +7,8 @@
 #' @param vars vector of variable names to be kept 
 #' @param s.id name of the variable that contains the ids in source data
 #' @param show.vars logical to enable printing of variable names in source data.
+#' 
+#' @importFrom foreach "%do%"
 #'  
 #' @export
 grab_dst <- function(path, reg, years, pop, vars=NULL, s.id=NULL, show.vars=F){
@@ -19,7 +21,7 @@ grab_dst <- function(path, reg, years, pop, vars=NULL, s.id=NULL, show.vars=F){
   files <- files[grepl(paste0(as.character(years), collapse="|"), files)]
   
   # pull to list
-  ff <- foreach(file = files) %do% {
+  ff <- foreach::foreach(file = files) %do% {
     f <- haven::read_sas(paste0(path, file))
     colnames(f) <- tolower(colnames(f))
     if (show.vars==T & file==files[1]){print(colnames(f))}
