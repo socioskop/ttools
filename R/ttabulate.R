@@ -9,7 +9,6 @@
 #' @param num dichotomize vector with names of those categorical variables in xs that should be dichotomized before summarizing 
 #' 
 #' @importFrom magrittr "%>%"
-#' @importFrom magrittr %>%
 #' @importFrom stats as.formula
 #' @importFrom stats chisq.test
 #' @importFrom stats coef
@@ -33,5 +32,7 @@ ttabulate <- function(data, xs, treat, num=NA, cat=NA, bin=NA, dichotomize=NA, c
     if (x %in% bin &         !x %in% dichotomize){try(t <- dplyr::bind_rows(t, twoway_chi(data=data, x, treat, cens=cens, bin=T, show.na=show.na)))}
     if (x %in% bin &          x %in% dichotomize){try(t <- dplyr::bind_rows(t, twoway_chi(data=data, x, treat, cens=cens, force.two=T, bin=T, show.na=show.na)))}
   }
+  t <- t %>% dplyr::mutate_if(.predicate = is.ok.num, function(x) as.num(as.chr(x)))
+  t <- t %>% dplyr::mutate_if(.predicate = is.factor, function(x)       (as.chr(x)))
   return(t)
 }
