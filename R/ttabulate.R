@@ -22,7 +22,7 @@ ttabulate <- function(data, xs, treat, num=NA, cat=NA, bin=NA, dichotomize=NA, c
     if (x %in% bin &         !x %in% dichotomize){try(t <- dplyr::bind_rows(t, twoway.chi(data=data, x, treat, cens=cens, bin=T, show.na=show.na)))}
     if (x %in% bin &          x %in% dichotomize){try(t <- dplyr::bind_rows(t, twoway.chi(data=data, x, treat, cens=cens, force.two=T, bin=T, show.na=show.na)))}
   }
-  t <- t %>% dplyr::mutate_if(ttools::is.ok.num, function(x) as.numeric(as.character(x)))
+  t <- t %>% dplyr::mutate_if(is.ok.num, function(x) as.numeric(as.character(x)))
   t <- t %>% dplyr::mutate_if(is.factor, function(x) as.character(x))
   return(t)
 }
