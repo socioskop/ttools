@@ -9,6 +9,7 @@
 #' @param num dichotomize vector with names of those categorical variables in xs that should be dichotomized before summarizing 
 #' 
 #' @importFrom magrittr "%>%"
+#' @importFrom magrittr %>%
 #' @importFrom stats as.formula
 #' @importFrom stats chisq.test
 #' @importFrom stats coef
