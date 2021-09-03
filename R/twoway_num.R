@@ -11,9 +11,13 @@
 twoway_num <- function(data, x, group, digit.m=1, digit.sd=1, cal.date=F){
   d <- data[!is.na(data[[group]]),]
   groups <- unique(na.omit(d[[group]]))
+  
+  # placeholder for groups
   tab <- rep(NA, 2*length(groups)+2)
   tab[1] <- x
   tab[2] <- NA
+  
+  # get mean and SD 
   k <- 3
   for (i in 1:length(groups)){
     if (cal.date==F){tab[k+0] <- form.it(mean(d[[x]][d[[group]]==groups[i]], na.rm=T), digit.m)
@@ -23,11 +27,12 @@ twoway_num <- function(data, x, group, digit.m=1, digit.sd=1, cal.date=F){
     tab[k+1] <- form.it(  sd(d[[x]][d[[group]]==groups[i]], na.rm=T), digit.sd)
     k <- k+2
   }
-  #tab[length(tab)+1] <- tryCatch({form.it(ordinal:::anova.clm(ordinal::clm(paste0("as.factor(", x, ")~as.factor(", group, ")",), data=d, link="logit"))$`Pr(>Chisq)`, 3)}, error=function(err) NA)
+  
+  # adding inferential test
   if (length(groups)>2){
     tab[length(tab)+1] <- tryCatch({form.it(pnorm(abs(coef(summary(MASS::polr(paste0("as.factor(", x, ")~as.factor(", group, ")"), data=d)))[1,3]), lower.tail = F)*2, 3)}, error=function(err) NA)
   } else {
-    tab[length(tab)+1] <- form.it(wilcox.test(as.formula(paste0("as.numeric(", x, ")~as.factor(", group, ")")), data=na.omit(d[,c(x, group)]))$p.value, 3)
+    tab[length(tab)+1] <- tryCatch({form.it(wilcox.test(as.formula(paste0("as.numeric(", x, ")~as.factor(", group, ")")), data=na.omit(d[,c(x, group)]))$p.value, 3)}, error=function(err) NA)
   }
   tab <- as.data.frame(t(tab))
   colnames(tab) <- c("var", "level", rbind(paste0(groups, ".mean/n"), paste0(groups, ".sd/%")), "p.val")
