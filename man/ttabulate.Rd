@@ -8,13 +8,17 @@ ttabulate(
   data,
   xs,
   treat,
+  weight = NULL,
   num = NA,
   cat = NA,
   bin = NA,
   dichotomize = NA,
-  cal.date = NA,
+  dates = NA,
   cens = 5,
-  show.na = F
+  show.na = F,
+  na.count = F,
+  test = "auto",
+  shapiro.p = 1e-04
 )
 }
 \arguments{

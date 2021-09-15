@@ -4,7 +4,17 @@
 \alias{twoway_num}
 \title{twoway table of numeric data}
 \usage{
-twoway_num(data, x, group, digit.m = 1, digit.sd = 1, cal.date = F)
+twoway_num(
+  data,
+  x,
+  group,
+  weight,
+  digit.m = 1,
+  digit.sd = 1,
+  cal.date = F,
+  test = "auto",
+  shapiro.p = 1e-04
+)
 }
 \arguments{
 \item{data}{data frame}
