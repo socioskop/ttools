@@ -43,7 +43,7 @@ twoway_num <- function(data, x, group, weight, digit.m=1, digit.sd=1, cal.date=F
   
   # decide which test to use
   if (test=="auto"){
-    if(shapiro.test(resid(glm(paste0(x, "~factor(", group, ")"), data=data)))$p.value<shapiro.p){
+    if(shapiro.test(resid(glm(paste0("as.num(", x, ")~factor(", group, ")"), data=data)))$p.value<shapiro.p){
       test <- "rank"
     } else {test <- "ttest"}
   }
@@ -53,7 +53,7 @@ twoway_num <- function(data, x, group, weight, digit.m=1, digit.sd=1, cal.date=F
     tab[length(tab)+1] <- tryCatch({form.it(
       ordinal:::anova.clm(ordinal::clm(paste0("as.factor(", x, ")~as.factor(", group, ")"), weights = data[["weight"]], data=data, link = "logit"))$`Pr(>Chisq)`, 3)}, error=function(err) NA)
   } else if (test=="ttest"){
-    yy <- data[,x]
+    yy <- as.num(data[,x])
     xx <- data[,group]
     weights <- data[,weight]
     m <- glm(yy ~ xx, weights = weights)
@@ -62,7 +62,7 @@ twoway_num <- function(data, x, group, weight, digit.m=1, digit.sd=1, cal.date=F
   
   # wrap up
   tab <- as.data.frame(t(tab))
-  colnames(tab) <- c("var", "level", rbind(paste0(groups, ".mean/n"), paste0(groups, ".sd/%"), paste0(groups, ".median")), "p")
+  colnames(tab) <- c("var", "level", rbind(paste0(groups, ".mean/n"), paste0(groups, ".sd/%"), paste0(groups, ".median")), "p.val")
   tab$test <- test
   return(tab)
 }
