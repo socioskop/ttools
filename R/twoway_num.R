@@ -26,16 +26,14 @@ twoway_num <- function(data, x, group, weight, digit.m=1, digit.sd=1, cal.date=F
   # get mean and SD 
   k <- 3
   for (i in 1:length(groups)){
-    print(cal.date)
+
     # add mean, SD and median (in date format if x is Date)
     if (cal.date==F){
       tab[k+0] <- form.it(matrixStats::weightedMean  (data[[x]][data[[group]]==groups[i]], w=data$weight[data[[group]]==groups[i]], na.rm=T), digit.m)
       tab[k+1] <- form.it(matrixStats::weightedSd    (data[[x]][data[[group]]==groups[i]], w=data$weight[data[[group]]==groups[i]], na.rm=T), digit.sd)
       tab[k+2] <- form.it(matrixStats::weightedMedian(data[[x]][data[[group]]==groups[i]], w=data$weight[data[[group]]==groups[i]], na.rm=T), digit.sd)
     } else {
-      print(tab)
       tab[k+0] <- as.chr(lubridate::as_date(round(matrixStats::weightedMean  (as.num(data[[x]][data[[group]]==groups[i]]), w=data$weight[data[[group]]==groups[i]], na.rm=T))))
-      print(tab)
       #tab[k+1] <- form.it(matrixStats::weightedSd    (as.num(as.Date(as.chr(data[[x]][data[[group]]==groups[i]]))), w=data$weight[data[[group]]==groups[i]], na.rm=T), digit.sd)
       #tab[k+2] <- as.chr(lubridate::as_date(round(matrixStats::weightedMedian(as.num(as.Date(as.chr(data[[x]][data[[group]]==groups[i]]))), w=data$weight[data[[group]]==groups[i]], na.rm=T))))
     }

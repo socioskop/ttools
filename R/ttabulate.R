@@ -27,7 +27,7 @@ ttabulate <- function(data, xs, treat, weight=NULL, num=NA, cat=NA, bin=NA, dich
     
     # generate segment
     if (x %in% "n"){try(t <- dplyr::bind_rows(t, twoway_n  (data=data, x, treat)))}
-    if (x %in% num                              ){try(t <- dplyr::bind_rows(t, twoway_num(data=data, x, treat, weight=weight, digit.m = 2, digit.sd = 2, cal.date=(x %in% dates), test=test, shapiro.p=shapiro.p)))}
+    if (x %in% num                              ){try(t <- dplyr::bind_rows(t, twoway_num(data=data, x, treat, weight=weight, digit.m = 2, digit.sd = 2, cal.date=ifelse(x %in% dates, T, F), test=test, shapiro.p=shapiro.p)))}
     if (x %in% cat                              ){try(t <- dplyr::bind_rows(t, twoway_chi(data=data, x, treat, cens=cens, show.na=show.na)))}
     if (x %in% dichotomize & !x %in% bin        ){try(t <- dplyr::bind_rows(t, twoway_chi(data=data, x, treat, cens=cens, force.two=T, show.na=show.na)))}
     if (x %in% bin &         !x %in% dichotomize){try(t <- dplyr::bind_rows(t, twoway_chi(data=data, x, treat, cens=cens, bin=T, show.na=show.na)))}
