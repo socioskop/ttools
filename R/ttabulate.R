@@ -19,7 +19,7 @@
 #' @importFrom stats wilcox.test
 #' 
 #' @export
-ttabulate <- function(data, xs, treat, weight=NULL, num=NA, cat=NA, bin=NA, dichotomize=NA, cal.date=NA, cens=5, show.na=F, na.count=F, test=NULL, shapiro.p=NULL){
+ttabulate <- function(data, xs, treat, weight=NULL, num=NA, cat=NA, bin=NA, dichotomize=NA, cal.date=NA, cens=5, show.na=F, na.count=F, test="auto", shapiro.p=0.0001){
   data <- as.rdf(data)
   t <- data.frame()
   for (x in xs){
