@@ -38,11 +38,10 @@ twoway_num <- function(data, x, group, weight, digit.m=1, digit.sd=1, cal.date=F
       tab[k+2] <- form.it(lubridate::as_date(round(matrixStats::weightedMedian(data[[x]][data[[group]]==groups[i]], w=data$weight[data[[group]]==groups[i]], na.rm=T))))
     }
     
-
     # move on for next group
     k <- k+3
   }
-  
+  print(tab)
   # decide which test to use
   if (test=="auto"){
     if(shapiro.test(resid(glm(paste0("as.num(", x, ")~factor(", group, ")"), data=data)))$p.value<shapiro.p){
