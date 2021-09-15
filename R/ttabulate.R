@@ -51,7 +51,9 @@ ttabulate <- function(data, xs, treat, weight=NULL, num=NA, cat=NA, bin=NA, dich
     t <- cbind(t[,colnames(t)!="nas"], t$nas)
     colnames(t)[colnames(t) %in% c("nas", "t$nas")] <- paste0("NA's for ", paste0(groups, collapse="/")) 
   } 
-  t <- t %>% dplyr::mutate_if(.predicate = is.ok.num, function(x) as.num(as.chr(x)))
+  
+  # align formatting
+  t <- t %>% dplyr::mutate_if(.predicate = is.ok.num & !is.ok.date, function(x) as.num(as.chr(x)))
   t <- t %>% dplyr::mutate_if(.predicate = is.factor, function(x)       (as.chr(x)))
   return(t)
 }
