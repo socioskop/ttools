@@ -8,6 +8,7 @@
 #' @param cal.date logical indicating that the x variable should be treated as a date. Will then show the mean value as an actual date.
 #' @import matrixStats 
 #' @import lubridate  
+#' @import ordinal  
 #' 
 #' @export 
 twoway_num <- function(data, x, group, weight, digit.m=1, digit.sd=1, cal.date=F, test="auto", shapiro.p=.0001){
@@ -52,7 +53,7 @@ twoway_num <- function(data, x, group, weight, digit.m=1, digit.sd=1, cal.date=F
   # adding inferential test
   if (test=="rank"){
     tab[length(tab)+1] <- tryCatch({form.it(
-      ordinal:::anova.clm(ordinal::clm(paste0("as.factor(", x, ")~as.factor(", group, ")"), weights = data[["weight"]], data=data, link = "logit"))$`Pr(>Chisq)`, 3)}, error=function(err) NA)
+      ordinal:::anova.clm(ordinal::clm(paste0("as.factor(as.num(", x, "))~as.factor(", group, ")"), weights = data[["weight"]], data=data, link = "logit"))$`Pr(>Chisq)`, 3)}, error=function(err) NA)
   } else if (test=="ttest"){
     yy <- as.num(data[,x])
     xx <- data[,group]
