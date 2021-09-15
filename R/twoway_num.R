@@ -13,9 +13,9 @@ twoway_num <- function(data, x, group, weight, digit.m=1, digit.sd=1, cal.date=F
   
   # ensure rdf object, add/identify weight
   if (is.null(weight)){data$weight <- 1; weight <- "weight"} else {data$weight <- data[[weight]]; data[[weight]] <- NULL; weight <- "weight"}
-  d <- as.rdf(data)[!is.na(data[[group]]),]; rm("data")
+  data <- as.rdf(data)[!is.na(data[[group]]),] 
   
-  groups <- unique(na.omit(d[[group]]))
+  groups <- unique(na.omit(data[[group]]))
   
   # placeholder for groups
   tab <- rep(NA, 2*length(groups)+2)
