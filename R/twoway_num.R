@@ -7,6 +7,7 @@
 #' @param digit.sd number of digits for estimates of the standard deviation
 #' @param cal.date logical indicating that the x variable should be treated as a date. Will then show the mean value as an actual date.
 #' @import matrixStats 
+#' @import lubridate  
 #' 
 #' @export 
 twoway_num <- function(data, x, group, weight, digit.m=1, digit.sd=1, cal.date=F, test="auto", shapiro.p=.0001){
