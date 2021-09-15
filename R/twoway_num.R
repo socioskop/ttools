@@ -26,7 +26,7 @@ twoway_num <- function(data, x, group, weight, digit.m=1, digit.sd=1, cal.date=F
   # get mean and SD 
   k <- 3
   for (i in 1:length(groups)){
-    
+    print(cal.date)
     # add mean, SD and median (in date format if x is Date)
     if (cal.date==F){
       tab[k+0] <- form.it(matrixStats::weightedMean  (data[[x]][data[[group]]==groups[i]], w=data$weight[data[[group]]==groups[i]], na.rm=T), digit.m)
