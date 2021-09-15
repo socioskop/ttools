@@ -19,7 +19,7 @@
 #' @importFrom stats wilcox.test
 #' 
 #' @export
-ttabulate <- function(data, xs, treat, num=NA, cat=NA, bin=NA, dichotomize=NA, cal.date=NA, cens=5, show.na=F, na.count=F){
+ttabulate <- function(data, xs, treat, weight=NULL, num=NA, cat=NA, bin=NA, dichotomize=NA, cal.date=NA, cens=5, show.na=F, na.count=F, test=NULL, shapiro.p=NULL){
   data <- as.rdf(data)
   t <- data.frame()
   for (x in xs){
@@ -27,7 +27,7 @@ ttabulate <- function(data, xs, treat, num=NA, cat=NA, bin=NA, dichotomize=NA, c
     
     # generate segment
     if (x %in% "n"){try(t <- dplyr::bind_rows(t, twoway_n  (data=data, x, treat)))}
-    if (x %in% num){try(t <- dplyr::bind_rows(t, twoway_num(data=data, x, treat, digit.m = 2, digit.sd = 2)))}
+    if (x %in% num){try(t <- dplyr::bind_rows(t, twoway_num(data=data, x, treat, weight=weight, digit.m = 2, digit.sd = 2, test=test, shapiro.p=shapiro.p)))}
     if (x %in% cal.date){try(t <- dplyr::bind_rows(t, twoway_num(data=data, x, treat, digit.m = 2, digit.sd = 2, cal.date==T)))}
     if (x %in% cat){try(t <- dplyr::bind_rows(t, twoway_chi(data=data, x, treat, cens=cens, show.na=show.na)))}
     if (x %in% dichotomize & !x %in% bin){try(t <- dplyr::bind_rows(t, twoway_chi(data=data, x, treat, cens=cens, force.two=T, show.na=show.na)))}
