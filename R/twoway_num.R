@@ -34,8 +34,8 @@ twoway_num <- function(data, x, group, weight, digit.m=1, digit.sd=1, cal.date=F
       tab[k+2] <- form.it(matrixStats::weightedMedian(data[[x]][data[[group]]==groups[i]], w=data$weight[data[[group]]==groups[i]], na.rm=T), digit.sd)
     } else {
       tab[k+0] <- as.chr(lubridate::as_date(round(matrixStats::weightedMean  (as.num(data[[x]][data[[group]]==groups[i]]), w=data$weight[data[[group]]==groups[i]], na.rm=T))))
-      #tab[k+1] <- form.it(matrixStats::weightedSd    (as.num(as.Date(as.chr(data[[x]][data[[group]]==groups[i]]))), w=data$weight[data[[group]]==groups[i]], na.rm=T), digit.sd)
-      #tab[k+2] <- as.chr(lubridate::as_date(round(matrixStats::weightedMedian(as.num(as.Date(as.chr(data[[x]][data[[group]]==groups[i]]))), w=data$weight[data[[group]]==groups[i]], na.rm=T))))
+      tab[k+1] <- form.it(matrixStats::weightedSd    (as.num(data[[x]][data[[group]]==groups[i]]), w=data$weight[data[[group]]==groups[i]], na.rm=T), digit.sd)
+      tab[k+2] <- as.chr(lubridate::as_date(round(matrixStats::weightedMedian(as.num(data[[x]][data[[group]]==groups[i]]), w=data$weight[data[[group]]==groups[i]], na.rm=T))))
     }
     
     # move on for next group
