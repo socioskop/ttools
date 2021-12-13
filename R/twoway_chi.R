@@ -20,7 +20,7 @@ twoway_chi <- function(data, x, group, bin=F, cens, force.two=F, show.na=F) {
   if (is.null(cens)){cens <- -Inf}
   
   # generate table, p.value and labels
-  tab <- table(as.character(d[[x]]), d[[group]], useNA="ifany")
+  tab <- table(as.character(d[[x]]), d[[group]], useNA=ifelse(show.na, "ifany", "no"))
   
   groups <- colnames(tab)
   if (nrow(tab)<2){stop("too few levels")}
