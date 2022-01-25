@@ -6,13 +6,21 @@
 #' 
 #' @export
 twoway_n <- function(data, x, group){
+  
+  # read data
   d <- data[!is.na(data[[group]]),]
-  tab <- table(d[[x]], d[[group]], useNA="ifany")
+  
+  # ignore missings
+  tab <- table(d[[x]], d[[group]])
   groups <- colnames(tab)
   if (nrow(tab)>1){stop("too many levels for n-count")}
+  
+  # build simple n-table
   tab <- c(rbind(tab, form.it(prop.table(tab, 2)*100, 1)))
   tab <- c(x, NA, tab, NA)
   tab <- as.data.frame(t(tab))
+  
+  # wrap up and return
   colnames(tab) <- c("var", "level", rbind(paste0(groups, ".mean/n"), paste0(groups, ".sd/%")), "p.val")
   return(tab)
 }
